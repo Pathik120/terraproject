@@ -266,17 +266,7 @@ resource "aws_instance" "backend" {
     ]
   }
   
-  provisioner "file" {
-    source      = "/home/ubuntu/terraproject/terra/scripts/ansible-install-ubuntu.sh"
-    destination = "/tmp/ansible-install-ubuntu.sh"
-  }
 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod a+x /tmp/ansible-install-ubuntu.sh",
-      "/tmp/ansible-install-ubuntu.sh",
-    ]
-  }
 
 }
 
