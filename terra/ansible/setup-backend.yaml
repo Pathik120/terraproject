@@ -21,9 +21,6 @@
       service: name=apache2 state=started enabled=True
       when: ansible_os_family == "Debian"
    
-    - name: Download Mario Image from Web.
-      get_url: url=http://www.mariomayhem.com/downloads/wallpapers/7/nsmb_wp7_1280.jpg dest=/var/www/html/mario.jpg mode=0755
-
     - name: Deploy Sample Sites Files
       template: src=templates/index.j2 dest=/var/www/html/index.html
       notify: 
@@ -31,10 +28,6 @@
   
     - name: Deploy Sample Sites Files
       template: src=templates/info.j2 dest=/var/www/html/info.html
-
-
-    - name: Deploy Jenkins Info file
-      copy: src=templates/jenkins.html dest={{doc_root}}/jenkins.html
 
     - name: Start Java Service 
       apt: name=openjdk-8-jdk state=present
