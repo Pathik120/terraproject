@@ -90,18 +90,6 @@ resource "aws_instance" "backend" {
       "sudo apt-get install python sshpass -y",
     ]
   }
-  provisioner "local-exec" {
-  command = <<EOT
-        sleep 100;
-        > jenkins-ci.ini;
-        echo "[jenkins-ci]"| tee -a jenkins-ci.ini;
-        export ANSIBLE_HOST_KEY_CHECKING=False;
-        echo "${aws_instance.backend.public_ip}" | tee -a jenkins-ci.ini;
-        ansible-playbook -e  sshKey=${var.private_key_path} -i jenkins-ci.ini ./ansible/setup-backend.yaml -u ubuntu -v
-    EOT
-}
-  
-
 }
 
 ######################## Ansible setup ########################
